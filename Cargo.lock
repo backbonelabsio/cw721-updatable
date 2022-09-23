@@ -3,21 +3,6 @@
 version = 3
 
 [[package]]
-name = "archid-nft"
-version = "0.13.4"
-dependencies = [
- "cosmwasm-schema",
- "cosmwasm-std",
- "cw-storage-plus",
- "cw-utils",
- "cw2",
- "cw721-updatable",
- "schemars",
- "serde",
- "thiserror",
-]
-
-[[package]]
 name = "base16ct"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -194,6 +179,21 @@ dependencies = [
  "cw-storage-plus",
  "schemars",
  "serde",
+]
+
+[[package]]
+name = "cw721-base"
+version = "0.13.4"
+dependencies = [
+ "cosmwasm-schema",
+ "cosmwasm-std",
+ "cw-storage-plus",
+ "cw-utils",
+ "cw2",
+ "cw721-updatable",
+ "schemars",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]

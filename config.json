@@ -12,35 +12,7 @@
       "query": "archwayd query wasm",
       "tx": "archwayd tx wasm execute"
     },
-    "deployments": [
-      {
-        "type": "set-metadata",
-        "chainId": "constantine-1",
-        "codeId": 184,
-        "txhash": "4C3EC2BAC0B50CB48198652B095C0BB96A082977D3FFFAE054E1EC4AA7B8B365",
-        "contract": "archway19kmmnhemju22afh4fceuny6dvuqzmpwxvrnu89ypv8dvtzp3479sld6gja",
-        "contractMetadata": {
-          "developerAddress": "archway1f395p0gg67mmfd5zcqvpnp9cxnu0hg6r9hfczq",
-          "rewardAddress": "archway1f395p0gg67mmfd5zcqvpnp9cxnu0hg6r9hfczq",
-          "collectPremium": false,
-          "gasRebate": false
-        }
-      },
-      {
-        "type": "instantiate",
-        "chainId": "constantine-1",
-        "codeId": 184,
-        "txhash": "7FA8AAB27E042E7BF318A131B3F71D8E35FE0FCDA6FBD2001691B0F7883A997F",
-        "address": "archway19kmmnhemju22afh4fceuny6dvuqzmpwxvrnu89ypv8dvtzp3479sld6gja",
-        "admin": "archway1f395p0gg67mmfd5zcqvpnp9cxnu0hg6r9hfczq"
-      },
-      {
-        "type": "store",
-        "chainId": "constantine-1",
-        "codeId": 184,
-        "txhash": "DAFD0BBD8BE36820A346A9528A07D80F007D75C155752D87D3E3B0780DD3CCAD"
-      }
-    ]
+    "deployments": []
   },
   "network": {
     "name": "constantine",

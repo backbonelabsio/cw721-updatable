@@ -91,6 +91,14 @@ where
         info: MessageInfo,
         token_id: String,
     ) -> Result<Response<C>, Self::Err>;
+
+    fn burn_admin_only(
+        &self,
+        deps: DepsMut,
+        env: Env,
+        info: MessageInfo,
+        token_id: String,
+    ) -> Result<Response<C>, Self::Err>;
 }
 
 pub trait Cw721Query<T>

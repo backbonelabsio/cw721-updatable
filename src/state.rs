@@ -112,7 +112,7 @@ pub struct TokenInfo<T> {
     /// Metadata JSON Schema
     pub token_uri: Option<String>,
 
-    /// You can add any custom metadata here when you extend cw721-base
+    /// You can add any custom metadata here when you extend cw721-archid
     pub extension: T,
 }
 

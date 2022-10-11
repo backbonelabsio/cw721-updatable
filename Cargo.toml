@@ -1,5 +1,5 @@
 [package]
-name = "cw721-base"
+name = "cw721-archid"
 version = "0.13.4"
 edition = "2018"
 description = "Basic implementation cw721 NFTs"

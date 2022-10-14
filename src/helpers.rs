@@ -10,7 +10,7 @@ use serde::__private::PhantomData;
 use serde::de::DeserializeOwned;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq)]
 pub struct Cw721Contract<Q: CustomMsg, E: CustomMsg>(
     pub Addr,
     pub PhantomData<Q>,

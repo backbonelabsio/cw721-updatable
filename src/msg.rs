@@ -63,11 +63,8 @@ pub enum ExecuteMsg<T, E> {
     /// Mint a new NFT, can only be called by the contract minter
     Mint(MintMsg<T>),
 
-    /// Burn an NFT the sender has access to
+    /// Burn an NFT, only admin can do this
     Burn { token_id: String },
-
-    /// Burn admin only override
-    BurnAdminOnly { token_id: String },
 
     /// Extension msg
     Extension { msg: E },

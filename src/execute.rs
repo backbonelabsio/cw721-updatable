@@ -74,7 +74,7 @@ where
             // Default burn
             ExecuteMsg::Burn { token_id } => self.burn(deps, env, info, token_id),
             // Admin only burn override
-            ExecuteMsg::BurnAdminOnly { token_id } => self.burn_admin_only(deps, env, info, token_id),
+            // ExecuteMsg::BurnAdminOnly { token_id } => self.burn_admin_only(deps, env, info, token_id),
             // Update extensions metadata
             ExecuteMsg::UpdateMetadata(msg) => self.update_metadata(deps, env, info, msg),
             
@@ -293,26 +293,26 @@ where
             .add_attribute("operator", operator))
     }
 
+    // fn burn(
+    //     &self,
+    //     deps: DepsMut,
+    //     env: Env,
+    //     info: MessageInfo,
+    //     token_id: String,
+    // ) -> Result<Response<C>, ContractError> {
+    //     let token = self.tokens.load(deps.storage, &token_id)?;
+    //     self.check_can_send(deps.as_ref(), &env, &info, &token)?;
+
+    //     self.tokens.remove(deps.storage, &token_id)?;
+    //     self.decrement_tokens(deps.storage)?;
+
+    //     Ok(Response::new()
+    //         .add_attribute("action", "burn")
+    //         .add_attribute("sender", info.sender)
+    //         .add_attribute("token_id", token_id))
+    // }
+
     fn burn(
-        &self,
-        deps: DepsMut,
-        env: Env,
-        info: MessageInfo,
-        token_id: String,
-    ) -> Result<Response<C>, ContractError> {
-        let token = self.tokens.load(deps.storage, &token_id)?;
-        self.check_can_send(deps.as_ref(), &env, &info, &token)?;
-
-        self.tokens.remove(deps.storage, &token_id)?;
-        self.decrement_tokens(deps.storage)?;
-
-        Ok(Response::new()
-            .add_attribute("action", "burn")
-            .add_attribute("sender", info.sender)
-            .add_attribute("token_id", token_id))
-    }
-
-    fn burn_admin_only(
         &self,
         deps: DepsMut,
         _env: Env,

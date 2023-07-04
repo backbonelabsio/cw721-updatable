@@ -1,6 +1,6 @@
 [package]
 name = "cw721-archid"
-version = "0.13.4"
+version = "1.0.0"
 edition = "2018"
 description = "Arch ID implementation cw721 NFTs"
 license = "Apache-2.0"

@@ -146,9 +146,6 @@ where
         // Set extension metadata
         token.extension = metadata;
 
-        // Reset token approvals
-        token.approvals = vec![];
-
         self.tokens.save(deps.storage, &token_id, &token)?;
     
         Ok(Response::new()

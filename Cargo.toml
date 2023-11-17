@@ -1,6 +1,6 @@
 [package]
 name = "cw721-archid"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2018"
 description = "ArchID implementation of cw721 NFTs with updatable metadata"
 repository = "https://github.com/archid-protocol/cw721-updatable"

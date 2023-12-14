@@ -183,7 +183,7 @@ dependencies = [
 
 [[package]]
 name = "cw721-archid"
-version = "1.0.2"
+version = "1.0.3"
 dependencies = [
  "cosmwasm-schema",
  "cosmwasm-std",

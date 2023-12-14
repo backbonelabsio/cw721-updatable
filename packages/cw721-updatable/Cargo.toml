@@ -9,9 +9,8 @@ authors = [
 edition = "2018"
 description = "Definition and types for the CosmWasm-721 NFT interface"
 license = "Apache-2.0"
-repository = "https://github.com/CosmWasm/cw-nfts"
-homepage = "https://cosmwasm.com"
-documentation = "https://docs.cosmwasm.com"
+repository = "https://github.com/archid-protocol/cw721-updatable"
+homepage = "https://archid.app"
 
 [dependencies]
 cw-utils = "0.13.4"

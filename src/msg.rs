@@ -93,6 +93,7 @@ pub struct UpdateMetadataMsg<T> {
     pub token_id: String,
     /// Any custom extension used by this contract
     pub extension: T,
+    pub token_uri: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema)]
@@ -178,3 +179,6 @@ pub enum QueryMsg<Q> {
 pub struct MinterResponse {
     pub minter: String,
 }
+
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema)]
+pub struct MigrateMsg {}

@@ -7,11 +7,11 @@ use cw2::set_contract_version;
 use cw721_updatable::{ContractInfoResponse, CustomMsg, Cw721Execute, Cw721ReceiveMsg, Expiration};
 
 use crate::error::ContractError;
-use crate::msg::{ExecuteMsg, InstantiateMsg, MintMsg, UpdateMetadataMsg};
+use crate::msg::{ExecuteMsg, InstantiateMsg, MigrateMsg, MintMsg, UpdateMetadataMsg};
 use crate::state::{Approval, Cw721Contract, TokenInfo};
 
 // Version info for migration
-const CONTRACT_NAME: &str = "crates.io:cw721-archid";
+const CONTRACT_NAME: &str = "crates.io:cw721-bbl";
 const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 impl<'a, T, C, E, Q> Cw721Contract<'a, T, C, E, Q>
@@ -145,6 +145,11 @@ where
 
         // Set extension metadata
         token.extension = metadata;
+
+        // Update token_uri if provided
+        if let Some(token_uri) = msg.token_uri {
+            token.token_uri = Some(token_uri);
+        }
 
         self.tokens.save(deps.storage, &token_id, &token)?;
     
@@ -439,4 +444,32 @@ where
             None => Err(ContractError::Unauthorized {}),
         }
     }
+}
+
+#[cfg_attr(not(feature = "library"), entry_point)]
+pub fn migrate(deps: DepsMut, _env: Env, _msg: MigrateMsg) -> Result<Response, ContractError> {
+    // Get the version of the contract we're migrating from
+    let ver = cw2::get_contract_version(deps.storage)?;
+
+    // We allow migration from standard cw721 contracts or previous versions of our own
+    let allowed_contracts = ["crates.io:cw721-metadata-onchain", CONTRACT_NAME];
+
+    if !allowed_contracts.contains(&ver.contract.as_str()) {
+        return Err(ContractError::CannotMigrate {
+            previous_contract: ver.contract,
+        });
+    }
+
+    // Update the contract version
+    set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
+
+    // If we're coming from a standard cw721, we might need to initialize some new storage
+    // (Only needed if your contract adds new storage items not in standard cw721)
+
+    // Return success
+    Ok(Response::default()
+        .add_attribute("method", "migrate")
+        .add_attribute("from_version", ver.version)
+        .add_attribute("to_version", CONTRACT_VERSION)
+        .add_attribute("from_contract", ver.contract))
 }

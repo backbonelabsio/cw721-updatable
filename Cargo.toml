@@ -1,9 +1,9 @@
 [package]
-name = "cw721-archid"
-version = "1.0.3"
+name = "cw721-bbl"
+version = "1.0.0"
 edition = "2018"
-description = "ArchID implementation of cw721 NFTs with updatable metadata"
-repository = "https://github.com/archid-protocol/cw721-updatable"
+description = "BackBone Labs implementation of cw721 NFTs with updatable metadata"
+repository = "https://github.com/backbonelabsio/cw721-updatable"
 license = "Apache-2.0"
 
 exclude = [

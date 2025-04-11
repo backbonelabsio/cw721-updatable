@@ -20,6 +20,8 @@ pub mod entry {
     #[cfg(not(feature = "library"))]
     use cosmwasm_std::entry_point;
     use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
+    use cw2::set_contract_version;
+    use crate::msg::MigrateMsg;
 
     // This makes a conscious choice on the various generics used by the contract
     #[cfg_attr(not(feature = "library"), entry_point)]
@@ -48,5 +50,38 @@ pub mod entry {
     pub fn query(deps: Deps, env: Env, msg: QueryMsg<Empty>) -> StdResult<Binary> {
         let tract = Cw721Contract::<Extension, Empty, Empty, Empty>::default();
         tract.query(deps, env, msg)
+    }
+
+    #[cfg_attr(not(feature = "library"), entry_point)]
+    pub fn migrate(
+        deps: DepsMut,
+        _env: Env,
+        _msg: MigrateMsg,
+    ) -> Result<Response, ContractError> {
+        // Constants for contract info
+        const CONTRACT_NAME: &str = "crates.io:cw721-bbl";
+        const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
+
+        // Get the version of the contract we're migrating from
+        let ver = cw2::get_contract_version(deps.storage)?;
+
+        // We allow migration from standard cw721 contracts or previous versions of our own
+        let allowed_contracts = ["crates.io:cw721-metadata-onchain", CONTRACT_NAME];
+
+        if !allowed_contracts.contains(&ver.contract.as_str()) {
+            return Err(ContractError::CannotMigrate {
+                previous_contract: ver.contract,
+            });
+        }
+
+        // Update the contract version
+        set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
+
+        // Return success
+        Ok(Response::default()
+            .add_attribute("method", "migrate")
+            .add_attribute("from_version", ver.version)
+            .add_attribute("to_version", CONTRACT_VERSION)
+            .add_attribute("from_contract", ver.contract))
     }
 }

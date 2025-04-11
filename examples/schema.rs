@@ -8,7 +8,8 @@ use cw721_updatable::{
     AllNftInfoResponse, ApprovalResponse, ApprovalsResponse, ContractInfoResponse, NftInfoResponse,
     NumTokensResponse, OperatorsResponse, OwnerOfResponse, TokensResponse,
 };
-use cw721_archid::{ExecuteMsg, Extension, InstantiateMsg, MinterResponse, QueryMsg};
+use cw721_bbl::{ExecuteMsg, Extension, InstantiateMsg, MinterResponse, QueryMsg};
+use cw721_bbl::msg::MigrateMsg;
 
 fn main() {
     let mut out_dir = current_dir().unwrap();
@@ -23,6 +24,7 @@ fn main() {
         "ExecuteMsg",
     );
     export_schema(&schema_for!(QueryMsg<Empty>), &out_dir);
+    export_schema(&schema_for!(MigrateMsg), &out_dir);
     export_schema_with_title(
         &schema_for!(AllNftInfoResponse<Extension>),
         &out_dir,

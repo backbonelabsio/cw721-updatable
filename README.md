@@ -18,10 +18,10 @@ The `ExecuteMsg` and `QueryMsg` implementations follow the [CW721 spec](../../pa
 Beyond that, we make a few additions:
 
 * `InstantiateMsg` takes name and symbol (for metadata), as well as a **Minter** address. This is a special address that has full 
-power to mint new NFTs (but not modify existing ones)
+power to mint new NFTs (and modify existing ones)
 * `ExecuteMsg::Mint{token_id, owner, token_uri, extension}` - creates a new token with given owner and (optional) metadata. It can only be called by
 the Minter set in `instantiate`.
-* `ExecuteMsg::Update{token_id, extension}` - updates a token's metadata provided permissions criteria are satisfied.
+* `ExecuteMsg::Update{token_id, extension, token_uri (optional)}` - updates a token's metadata. Only able to be called by minter address. Owner cannot modify their own metadata.
 * `QueryMsg::Minter{}` - returns the minter address for this contract.
 
 It requires all tokens to have defined metadata in the standard format (with no extensions). For generic NFTs this may often be enough.
@@ -35,7 +35,11 @@ If provided, it is expected that the _token_uri_ points to a JSON file following
 ## Updateble NFT Metadata
 Updating NFT metadata is possible only for NFT attributes stored as a token extension (e.g. see: `ExecuteMsg::Mint`, `ExecuteMsg::Extension`)
 
-* `UpdateMsg` is the message type for updating NFT metadata. Currently, it follows a permissions scheme where it can only be called by a `minter` (e.g. see: `QueryMsg::Minter{}`) who has been approved by token owner (e.g. see `QueryMsg::AllNftInfo`, `QueryMsg::Approvals`).
+* `UpdateMsg` is the message type for updating NFT metadata. Currently, it follows a permissions scheme where it can only be called by the `minter` (e.g. see: `QueryMsg::Minter{}`).
+
+New: 
+
+Both Extension (metadata) and `token_uri` is able to be updated
 
 ## Running this contract
 
@@ -69,5 +73,3 @@ This allows you to use custom `ExecuteMsg` and `QueryMsg` with your additional
 calls, but then use the underlying implementation for the standard cw721
 messages you want to support. The same with `QueryMsg`. You will most
 likely want to write a custom, domain-specific `instantiate`.
-
-**TODO: add example when written**

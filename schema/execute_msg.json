@@ -360,6 +360,12 @@
         "token_id": {
           "description": "Unique ID of the NFT",
           "type": "string"
+        },
+        "token_uri": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     }
